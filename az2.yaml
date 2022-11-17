@@ -1,0 +1,16 @@
+---
+trigger:
+- main
+
+pool: shopizer
+
+jobs:
+- job: build
+  steps:
+  - task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml' 
+    goals: 'clean install'
+    publishJUnitResults: true 
+    testResultsFiles: '**/surefire-reports/TEST-*.xml' 
+    jdkVersionOption: '1.11'

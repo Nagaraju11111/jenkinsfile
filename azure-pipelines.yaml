@@ -1,0 +1,19 @@
+---
+  trigger:
+    - main
+      
+  pool: devops
+      
+  stages:
+    - stage: 'build'
+      jobs:
+        - job: 'build'
+          steps:
+            - task: Maven@3
+              inputs:
+                mavenPOMFile: 'pom.xml'
+                goals: 'package'
+                publishJUnitResults: 'yes'
+                testResultsFiles: '**/surefire-reports/TEST-*.xml'
+                jdkVersionOption: '1.11'
+    
